@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Firebase</string>
+    <string name="search_texg">Search</string>
+    <string name="action_account_settings">Account settings</string>
+    <string name="account_settings">Account settings</string>
+    <string name="action_logout">Logout</string>
+    <string name="reg_confirm_pass_text"></string>
+</resources>

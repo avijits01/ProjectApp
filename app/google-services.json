@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "488744946452",
+    "firebase_url": "https://icasapp-9880a.firebaseio.com",
+    "project_id": "icasapp-9880a",
+    "storage_bucket": "icasapp-9880a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488744946452:android:1b7829f2ac180d28",
+        "android_client_info": {
+          "package_name": "com.example.firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488744946452-botaeouu8trtbqoq22oq2s41evr06p74.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.firebase",
+            "certificate_hash": "4351472d310b87e8d7fe5143ee8ea94ee31560bd"
+          }
+        },
+        {
+          "client_id": "488744946452-odvbci0gu1g4fjc9vfbk1lin7rv9a5ns.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqQttChjWNt2OeWkJ-BjnmXChkxX5Sn14"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488744946452-odvbci0gu1g4fjc9vfbk1lin7rv9a5ns.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
