@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/add_notes"
         android:layout_width="96dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="288dp"
