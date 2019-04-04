@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,6 +32,7 @@ public class SetupActivity extends AppCompatActivity {
      private EditText name;
      private Button apply;
      private FirebaseUser user;
+     public static String user_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -54,6 +56,7 @@ public class SetupActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
+                                        user_name=user.getDisplayName();
                                         Toast.makeText(SetupActivity.this, "Name updated successfully", Toast.LENGTH_LONG).show();
                                         Intent intent =new Intent(SetupActivity.this,MainActivity.class);
                                         startActivity(intent);
@@ -61,9 +64,11 @@ public class SetupActivity extends AppCompatActivity {
                                     }
                                 }
                             });
+                    MainActivity.arrayAdapter.notifyDataSetChanged();
                 }
             }
         });
+
         /*img=(ImageView) findViewById(R.id.setup_image);
         img.setOnClickListener(new View.OnClickListener() {
             @Override

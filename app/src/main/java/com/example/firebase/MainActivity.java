@@ -1,6 +1,10 @@
 package com.example.firebase;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,6 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
      static ArrayAdapter<String> arrayAdapter;
      public static ArrayList<String> notes =new ArrayList<>(); //creates an array list to implement adapter in the list view. In simple words the elements here are the elements of menu in the list view.
      public static ArrayList<String> title =new ArrayList<>(); //creates an array to store title of blog posts
-     public static ArrayList<String> names =new ArrayList<>(); // creates an array to store name of the people writing the blog
      public static ArrayList<String> content=new ArrayList<>();// creates an array to store content of blog post *sequentially*
+     public static ArrayList<String> names=new ArrayList<>();
     //So here goes the logic. Every index of arrays are linked sequentially. Means 1st element of the name array is the name of the user who wrote about the topic and content of the first element of topic and content array;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +41,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         Button add=(Button) findViewById(R.id.add_notes);
-        getSupportActionBar().setTitle("Icas App"); //this putts the title to the main page
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        getSupportActionBar().setTitle("Social Feed"); //this putts the title to the main page
         mAuth = FirebaseAuth.getInstance(); //gets the current object that handles the user
+       // SharedPreferences sharedpreferences = getSharedPreferences("Data", Context.MODE_PRIVATE);
+        //SharedPreferences.Editor editor = sharedPref.edit();
+        //editor.putInt(getString(R.string.saved_high_score_key), newHighScore);
+        //editor.commit();
         ListView listView= (ListView) findViewById(R.id.list_view);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +68,33 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                if(names.get(position).equals(user.getDisplayName())) {
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setTitle("Are you sure?")
+                            .setMessage("Do you want to delete your post?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    notes.remove(position);
+                                    title.remove(position);
+                                    content.remove(position);
+                                    names.remove(position);
+                                    EditActivity.i = EditActivity.i - 1;
+                                    arrayAdapter.notifyDataSetChanged();
+                                }
+                            })
+                            .setNegativeButton("No", null)
+                            .show();
+                }
+                return false;
+            }
+
+            });
     }
 
     @Override
